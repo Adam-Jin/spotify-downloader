@@ -448,7 +448,8 @@ class Downloader:
 
         # Reinitialize the song object if it's missing metadata
         # Or if we are fetching albums
-        if (
+        # Skip reinit when ytm_data is enabled to avoid Spotify API calls
+        if not self.settings["ytm_data"] and (
             (song.name is None and song.url)
             or self.settings["fetch_albums"]
             or any(
